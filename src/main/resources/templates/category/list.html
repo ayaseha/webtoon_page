@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org">
+	<div th:each="menu:${list}">
+		<a th:href="|/web/${menu.name().toLowerCase()}|" th:text="${menu.getKoName()}">카테고리이름</a>
+	</div>
+</html>

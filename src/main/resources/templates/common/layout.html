@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org"
+	 th:fragment="layout(head, main)">
+    <head>
+        <meta charset="UTF-8">
+        <title>Insert title here</title>
+        <script src="/webjars/jquery/jquery.min.js"></script>
+        <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/common.css">
+        <script type="text/javascript">
+			 $(function(){
+		        	getCategory();
+		        });
+		        
+		        function getCategory(){
+		        	$.get(
+		      			"/common/category",//url
+		      			function(resultHtml){ //success
+		        			$("#category").html(resultHtml);
+		        		}
+		        	)
+		        }
+		</script>
+        <th:block th:replace="${head}" />
+    </head>
+    <body>
+        <th:block th:insert="~{common/header}" />
+        <th:block th:replace="${main}" />
+    </body>
+</html>
