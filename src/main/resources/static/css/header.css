@@ -1,13 +1,31 @@
 @charset "UTF-8";
 
+a {text-decoration: none;}
+
 #logo {
 	margin: 0 20px;
 	font-size: 36px;
 	font-weight: 700;
-	text-decoration: none;	
+	
+}
+#category>div:not(div:last-of-type) {
+	margin: 20px auto;
+	padding: 0 10px;
+	
 }
 
-#category div {
-	margin: 20px auto;
-	
+#category div:last-of-type{
+	margin: 20px;
+	padding: 0 50px;
+}
+
+#user {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	font-size: 13px;
+	padding: 10px;
+}
+#user>a{
+	padding-left: 1em; 
 }

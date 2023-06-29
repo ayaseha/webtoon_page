@@ -8,6 +8,42 @@
 		<main>
 			<hr>
 			<p>메인화면</p>
+			<section id="visual" class="view-size">
+				<!-- 배너 섹션 -->
+				<div class="wrap">
+				<ol class="item-list">
+					<th:block th:each="i : ${#numbers.sequence(1,5)}">
+					<li class="item" >
+						<a href="#" th:style="|background-image: url('/images/visual/v${i}.png');|">[[${i}]]</a>
+					</li>
+					</th:block>
+				</ol>
+				<div class="btn-wrap">
+					<button class="btn prev" onclick="move(-1)">&lt;</button>
+					<button class="btn next" onclick="move(1)">&gt;</button>
+				</div>
+				
+				<ul class="bullet-wrap flex">
+					<li class="bullet" th:each="i : ${#numbers.sequence(1,5)}" th:text="${i}"></li>
+				</ul>
+				<div class="auto-wrap">
+					<button>
+						<span class="material-symbols-outlined" style="display: none;">play_arrow</span>
+						<span class="material-symbols-outlined">stop</span>
+					</button>
+					<span class="txt">
+						<span class="target">1</span>
+						/
+						<span class="tot">5</span>
+					</span>
+				</div>
+			</div>
+			</section>
+			<section id="list"> <!-- 시리즈 리스트 -->
+				<div>
+					
+				</div>
+			</section>
 		</main>
 	</body>
 </html>

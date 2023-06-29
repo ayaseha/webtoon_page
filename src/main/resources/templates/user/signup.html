@@ -1,10 +1,72 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
-	</head>
-	<body>
-		
-	</body>
+<html xmlns:th="//www.thymeleaf.org/" 
+	th:replace="~{ common/layout2 :: layout( ~{this::head} , ~{this::main} ) }">
+<head>
+	<meta charset="UTF-8">
+	<title>회원가입</title>
+</head>
+<body>
+	<main>
+		<h1>회원가입폼</h1>
+		<div class="wrap">
+			<form action="/signup" method="post">
+				<p>회원가입</p>
+				<ul>
+					<li class="input-wrap">
+						<p>이메일</p>
+						<input type="text" name="email" placeholder="이메일">
+						<span class="msg">메세지</span>
+					</li>
+					<li class="input-wrap">
+						<p>비밀번호</p>
+						<a>영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</a>
+						<input type="password" name="password" placeholder="비밀번호">
+						<span class="msg">메세지</span>
+					</li>
+					<li class="input-wrap">
+						<p>비밀번호 확인</p>
+						<input type="password" class="passCheck" name="passCheck" placeholder="비밀번호 확인">
+						<span class="msg">메세지</span>
+					</li>
+					<li class="input-wrap">
+						<p>닉네임</p>
+						<input type="text" name="nickName" placeholder="닉네임">
+						<span class="msg">메세지</span>
+					</li>
+					<li class="checkbox">
+						<p>약관동의</p>
+						<div class="check-wrap">
+							<div class="check-box">
+								<input  type="checkbox" id="check-all" name="checkAll">
+		        				<label for="check-all">전체동의</label>
+							</div>
+							<div class="check-box">
+		        				<input type="checkbox" id="fourteen" >
+		        				<label for="fourteen">만 14세 이상입니다. <span>(필수)</span></label>
+	        				</div>
+	        				<div class="check-box">
+		        				<input type="checkbox" id="term" >
+		        				<label for="term">이용약관 <span>(필수)</span></label>
+		        				<span><a href="/noti/term">(더보기)</a></span>
+	        				</div>
+	        				<div class="check-box">
+		        				<input type="checkbox" id="privacy" >
+		        				<label for="privacy">개인정보 수집 및 이용동의 <span>(필수)</span></label>
+		        				<span><a href="/noti/privacy">(더보기)</a></span>
+	        				</div>
+	        			</div>
+					</li>
+					<li class="sub-btn">
+						<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+						<button disabled>회원가입하기</button>
+					</li>
+					<li>
+						<p>이미 아이디가 있으신가요?</p>
+						<a href="/signin">로그인</a>
+					</li>
+				</ul>
+			</form>
+		</div>
+	</main>
+</body>
 </html>

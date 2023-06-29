@@ -1,7 +1,10 @@
 package com.green.nowon.domain.entity;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,26 +21,33 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "board")
+@Table(name = "series")
 @Entity
-public class BoardEntity extends BaseDateEntity {
+public class SeriesEntity extends BaseDateEntity {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	private long bno;
+	private long sno;
 	
 	@Column(nullable = false)
-	private String subTitle;
+	private String title;
 	
-	@Column(columnDefinition = "TEXT")
-	private String content;
+	private String seriesImg;
+	
+	@Column(nullable = false)
+	private String synopsis;
+	
+	@Column(nullable = false)
+	private String writer;
+	
+	@Enumerated(EnumType.STRING)
+	@CollectionTable(name = "category")
+	private Category category;
 	
 	@Column(columnDefinition = "int default 0")
-	private int readCount;
+	private int favorite;
 	
-	@JoinColumn(name = "sno")
+	@JoinColumn(name = "no")
 	@ManyToOne
-	private SeriesEntity series;
-	
-
+	private UserEntity user;
 }

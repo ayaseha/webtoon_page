@@ -1,0 +1,198 @@
+@charset "UTF-8";
+/* ///////////////////////////////////// */
+/* /////// visual ////////////////////// */
+/* ///////////////////////////////////// */
+#visual>.wrap{
+	position: relative;
+	height:534px;
+	width: 1920px;
+	margin: 0 auto;
+	/* overflow: hidden; */
+}
+#visual>.wrap .item-list{
+	width: 100%;
+	height: 100%;
+}
+#visual>.wrap .item-list .item{
+	position: absolute;
+	top:0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: all 0.5s;
+	
+}
+#visual>.wrap .item-list .item:first-child{
+	background-color: #fff;
+}
+#visual>.wrap .item-list .item.target{
+	opacity: 1;
+	transform: translateX(0%);
+}
+#visual>.wrap .item-list .item.next{
+	/* opacity: 1; */
+	transform: translateX(100%);
+}
+#visual>.wrap .item-list .item.prev{
+/* 	opacity: 1; */
+	transform: translateX(-100%);
+}
+
+#visual>.wrap .item-list .item a{
+	display:block;
+	width: 100%;
+	height: 100%;
+	background:  no-repeat center / cover;
+}
+
+#visual>.wrap .btn-wrap .btn{
+	position: absolute;
+	width: 100px;
+	height : 100px;
+	top: calc(50% - 50px);
+	display:inline-flex;
+	align-items:center;
+	text-align: center;
+	z-index: 2;
+}
+#visual>.wrap .btn-wrap .btn.prev{
+	left: 0;
+}
+#visual>.wrap .btn-wrap .btn.next{
+	right: 0;
+}
+
+#visual>.wrap .bullet-wrap{
+	position: absolute;
+	bottom: 20px;
+	left: calc(50% - 110px);
+}
+#visual>.wrap .bullet-wrap .bullet:hover{
+	cursor: pointer;
+	background-color: rgba(0,0,0,50%);
+	color: #f00;
+}
+#visual>.wrap .bullet-wrap .bullet{
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	background-color: rgba(255,255,255,75%);
+	border-radius: 50%;
+	margin: 0 2px;
+}
+#visual>.wrap .bullet-wrap .bullet.target{
+	cursor: pointer;
+	background-color: rgba(0,0,0,75%);
+	color: #fff;
+}
+#visual>.wrap .auto-wrap{
+	position: absolute;
+	bottom: 40px;
+	line-height: 40px;
+	left: 40px;
+	display: inline-flex;
+	font-size: 20px;
+	
+}
+#visual>.wrap .auto-wrap .txt{
+	margin-left: 5px;
+}
+
+/* /////// visual ////////////////////// */
+
+#service>.wrap ul>li a{
+	display:block;
+	width: 150px;
+	height: 106px;
+	text-align: center;
+}
+#service>.wrap ul>li a::before {
+	content: "";
+	display: block;
+	width: 70px;
+	height: 70px;
+	margin: 0 auto;
+	/* background: no-repeat  center / cover; */
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover; 
+	background-image: url("/images/index/n_icon1.png");
+	margin-bottom: 18px;
+}
+#service>.wrap ul>li:nth-child(1) a::before{background-image: url("/images/index/n_icon1.png");}
+#service>.wrap ul>li:nth-child(2) a::before{background-image: url("/images/index/n_icon2.png");}
+#service>.wrap ul>li:nth-child(3) a::before{background-image: url("/images/index/n_icon3.png");}
+#service>.wrap ul>li:nth-child(4) a::before{background-image: url("/images/index/n_icon4.png");}
+#service>.wrap ul>li:nth-child(5) a::before{background-image: url("/images/index/n_icon5.png");}
+
+
+
+#notice .wrap {
+	height: 370px;
+	background-color: #f0f0f0;
+}
+
+#notice>.wrap>ul {
+	max-width: 1168px;
+	flex-wrap: wrap;
+	margin: 0 auto;
+	padding: 0;
+}
+
+#notice>.wrap>ul>li {
+	display: inline-block;
+	content: "";
+	width: 260px;
+	height: 244px;
+	margin: 38px 10px 26px;
+
+}
+
+#notice>.wrap>ul>li a::before{
+	content: "";
+	display: block;
+	width: 260px;
+	height: 148px;
+	background: no-repeat center / cover;
+	margin: 0 auto;
+}
+
+#notice>.wrap>ul>li:not(:nth-of-type(3)) a::before {
+	background-image: url("/image/n_post_1.png");
+}
+#notice>.wrap>ul>li:nth-of-type(3) a::before {
+	background-image: url("/image/n_post_2.png");
+}
+
+#notice>.wrap>ul>li a p {
+	text-align: left;
+	margin: 0 16px;
+	font-weight: 300;
+	letter-spacing: -1px;
+	padding-top: 16px;
+}
+
+#notice>.wrap>ul>li>a {
+	display: block;
+	width: 260px;
+	height: 246px;
+	margin: 0 auto;
+	position: relative;
+}
+
+#notice>.wrap>ul>li>a>div{
+	height: 96px;
+	background-color: white;
+}
+
+#notice .wrap ul>a{
+	width: 1100px;
+	height: 36px;
+	line-height: 2;
+    text-align: center;
+    border: 1px solid #e9e9e9;
+    background-color: white;
+}
+
