@@ -32,8 +32,8 @@ public class CategoryController {
 	
 	@GetMapping("/web/{name}")
 	public String category(@PathVariable String name, Model model, @RequestParam(defaultValue = "1") int page) {
-		//bs.boardListProcess(name,model,page);
-		return "board/list";
+		service.seriesListProcess(name,model,page);
+		return "board/list-main";
 	}
 
 }

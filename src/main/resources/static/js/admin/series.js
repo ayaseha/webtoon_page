@@ -25,7 +25,7 @@ $(function(){
 		 beforeSend:function(xhr) {//csrf적용시 
 			xhr.setRequestHeader(header, token); 
 		 },		
-		 url:"/admin/item/temp",
+		 url:"/admin/series/temp",
 		 type:"post",
 		 data: formData,
 		 contentType:false,
@@ -41,8 +41,14 @@ $(function(){
 			 target.parents(".img-wrap").find(".new-name")
 			 	.val(map.newName);	
 			 
-			 	
 		 }
 	 })
 	 //*/
+	 spanHide()
+ }
+ 
+ function spanHide() {
+	var target= $(".img-wrap>label>span")
+	
+	target.addClass("hide")
  }

@@ -2,12 +2,17 @@
 <html xmlns:th="//www.thymeleaf.org/" th:replace="~{ common/admin-layout :: layout( ~{this::head} , ~{this::main} ) }">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="_csrf" th:content="${_csrf.token}"/>
+		<!-- default header name is X-CSRF-TOKEN -->
+		<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+		<link rel="stylesheet" href="/css/admin/series.css">
+		<script src="/js/admin/series.js"></script>
 		<title>시리즈 만들기</title>
 	</head>
 	<body>
 		<main>
 			<hr>
-			<div class="wrap">
+			<div class="wrap view-size">
 				<form action="/admin/series/new" method="post">
 					<p>
 						<span>작품명</span>
@@ -39,7 +44,7 @@
 					</p>
 					<p>
 						<span>줄거리</span>
-						<textarea name="synopsis" cols="100" rows="10" placeholder="줄거리를 입력해주세요."></textarea>
+						<textarea name="synopsis" cols="97" rows="10" placeholder="줄거리를 입력해주세요."></textarea>
 					</p>
 					<p>
 						<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />

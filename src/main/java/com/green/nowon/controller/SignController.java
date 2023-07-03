@@ -26,7 +26,7 @@ public class SignController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/js/check-email")
+	@PostMapping("/user/email-check")
 	public String emailCheck(String email) {
 		if(repo.findByEmail(email).isEmpty()) {
 			return "사용 가능한 이메일입니다.";

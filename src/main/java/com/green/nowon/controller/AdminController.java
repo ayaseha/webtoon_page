@@ -1,9 +1,13 @@
 package com.green.nowon.controller;
 
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.green.nowon.domain.dto.SeriesSaveDTO;
 import com.green.nowon.service.SeriesService;
@@ -37,6 +41,13 @@ public class AdminController {
 	public String seriesSave(SeriesSaveDTO dto) {
 		seDao.seriesSaveProcess(dto);
 		return "redirect:/admin";
+	}
+	
+	@PostMapping("/admin/series/temp")
+	@ResponseBody
+	public ResponseEntity<Map<String, String>> tempUpload(MultipartFile tempImg){
+		return ResponseEntity.ok()
+				.body(seDao.tempUpload(tempImg));//success: function(result){/*result로 path 전달*/}
 	}
 	
 

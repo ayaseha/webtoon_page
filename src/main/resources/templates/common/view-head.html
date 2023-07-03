@@ -1,9 +1,10 @@
-<!DOCTYPE html> <!-- 카테고리 없는 헤더 -->
+<!DOCTYPE html> 
 <html xmlns:th="//www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<header class="view-size">
+	<!-- 카테고리 없는 헤더 --> <!-- 시리즈 내부에 들어왔을때 보여지는 헤더 -->
 		<h1>헤더영역</h1>
-		<div id="logo">
-			<a href="/">로고</a>
+		<div id="logo" class="view-size">
+			<a href="/" >로고</a>
 		</div>
 		<div id="user" class="flex">
 			<a href="/admin" sec:authorize="hasRole('ROLE_ADMIN')">관리자 페이지</a>
@@ -19,4 +20,3 @@
 	</header>
 </html>
 
-<!-- 시리즈 내부에 들어왔을때 보여지는 헤더 -->

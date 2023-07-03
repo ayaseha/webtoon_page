@@ -1,10 +1,22 @@
-<!DOCTYPE html> <!-- 홈화면>카테고리 // 눌러서 진입한 메인화면 -->
-<html>
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org/" th:replace="~{ common/layout :: layout( ~{this::head} , ~{this::main} ) }">
 	<head>
+		 <!-- 홈화면>카테고리 // 눌러서 진입한 메인화면 -->
 		<meta charset="UTF-8">
 		<title>카테고리</title>
 	</head>
 	<body>
-		
+		<main>
+			<div class="wrap">
+				<ul th:each="list : ${list}" >
+<!-- 					<li> -->
+<!-- 						<a th:href="#"></a> -->
+<!-- 						<img alt="이미지확인" th:src="${list.url}"> -->
+<!-- 					</li> -->
+					<li th:text="${list.title}">제목</li>
+					<li th:text="${list.writer}">작가</li>
+				</ul>
+			</div>
+		</main>
 	</body>
 </html>

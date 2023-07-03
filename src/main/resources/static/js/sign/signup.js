@@ -139,7 +139,7 @@ function emailKeyup(){
 	//서버-DB로 접근
 	var target=$(this).parents(".input-wrap").find(".msg");
 	$.ajax({
-		url:"/js/check-email",
+		url:"/user/email-check",
 		type:"post",
 		data:{email:in_email},
 		//비동기요청이 정상적으로 처리되면 success 함수가 실행함

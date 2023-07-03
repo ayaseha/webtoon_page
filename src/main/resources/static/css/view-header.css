@@ -3,32 +3,23 @@
 a {text-decoration: none;}
 
 #logo {
-	margin: 0 20px;
 	font-size: 36px;
 	font-weight: 700;
-	
 }
-#category>div:not(div:last-of-type) {
-	margin: 20px auto;
-	padding: 0 10px;
-	
-}
-
-#category div:last-of-type{
-	margin: 20px;
-	padding: 0 50px;
+#logo>a {
+	display: inherit;
+	margin: 0 auto;
+	text-align: center;
 }
 
 #user {
-	position: absolute;
-	top: 5px;
-	right: 50px;
+	float: right;
+	top: 10px;
 	font-size: 13px;
 	padding: 10px;
 }
 #user>a{
 	padding-left: 1em; 
-	
 }
 
 #user a{

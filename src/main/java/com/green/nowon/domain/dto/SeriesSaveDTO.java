@@ -14,4 +14,9 @@ public class SeriesSaveDTO {
 	private String writer;
 	private Category category;
 	
+	private String bucketKey;
+	private String orgName;
+	private String newName;
+
+	
 }

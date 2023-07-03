@@ -1,10 +1,7 @@
 package com.green.nowon.domain.entity;
 
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,35 +14,26 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "series")
+@Table(name = "series_image")
 @Entity
-public class SeriesEntity extends BaseDateEntity {
+public class SeriesImgEntity {
 	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	private long sno;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long no;
 	@Column(nullable = false)
-	private String title;
-	
+	private String url; //s3경로
 	@Column(nullable = false)
-	private String synopsis;
-	
+	private String orgName; //s3경로
 	@Column(nullable = false)
-	private String writer;
+	private String newName; //s3경로
+	private String bucketKey; //파일명
 	
-	@Enumerated(EnumType.STRING)
-	@CollectionTable(name = "category")
-	private Category category;
-	
-	@Column(columnDefinition = "int default 0")
-	private int favorite;
-	
-	@JoinColumn(name = "no")
+	@JoinColumn(name = "sno")
 	@ManyToOne
-	private UserEntity user;
+	private SeriesEntity series;
 }
