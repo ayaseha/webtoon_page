@@ -7,11 +7,13 @@
         <title>Insert title here</title>
         <script src="/webjars/jquery/jquery.min.js"></script>
         <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/footer.css">
         <link rel="stylesheet" href="/css/common.css">
         <th:block th:replace="${head}" />
     </head>
     <body>
         <th:block th:insert="~{common/admin-head}" />
         <th:block th:replace="${main}" />
+        <th:block th:insert="~{common/footer}" />
     </body>
 </html>

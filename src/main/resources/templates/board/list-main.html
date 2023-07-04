@@ -2,19 +2,28 @@
 <html xmlns:th="//www.thymeleaf.org/" th:replace="~{ common/layout :: layout( ~{this::head} , ~{this::main} ) }">
 	<head>
 		 <!-- 홈화면>카테고리 // 눌러서 진입한 메인화면 -->
+		 <link rel="stylesheet" href="/css/board/main.css">
+		 <script src="/js/board/main.js"></script>
 		<meta charset="UTF-8">
 		<title>카테고리</title>
 	</head>
 	<body>
 		<main>
-			<div class="wrap">
-				<ul th:each="list : ${list}" >
-<!-- 					<li> -->
-<!-- 						<a th:href="#"></a> -->
-<!-- 						<img alt="이미지확인" th:src="${list.url}"> -->
-<!-- 					</li> -->
-					<li th:text="${list.title}">제목</li>
-					<li th:text="${list.writer}">작가</li>
+			<hr>
+			<div class="wrap view-size">
+				<ul class="flex">
+					<li th:each="list : ${mv}">
+						<a href="#">
+							<img th:alt="${list.title}" th:src="${list.url}">
+							<i class="info">
+								<span class="title" th:text="${list.title}">제목</span>
+								<span class="name-wrap flex">
+									<span th:text="${list.writer}">작가</span>
+									<span th:text="${list.favorite}" class="favorite"></span>
+								</span>
+							</i>
+						</a>
+					</li>
 				</ul>
 			</div>
 		</main>

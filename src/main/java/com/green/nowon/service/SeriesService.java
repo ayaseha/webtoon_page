@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.green.nowon.domain.dto.SeriesSaveDTO;
 
@@ -14,5 +15,8 @@ public interface SeriesService {
 	Map<String, String> tempUpload(MultipartFile tempImg);
 
 	void seriesListProcess(String name, Model model, int page);
+
+	ModelAndView allListProcess();
+
 
 }

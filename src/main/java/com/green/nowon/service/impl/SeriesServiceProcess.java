@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.green.nowon.domain.dto.SeriesListDTO;
@@ -70,11 +71,23 @@ public class SeriesServiceProcess implements SeriesService {
 		
 		List<SeriesListDTO> result= srepo.findAllByCategory(Category.valueOf(name.toUpperCase())).stream()
 													.map(img->new SeriesListDTO(img)
-															.defImg(imgRepo.findAllBySeries(img.getSno())))
+															.defImg(imgRepo.findBySeries(img)))
 													.collect(Collectors.toList());
-		model.addAttribute("list",result);
-		
+		model.addAttribute("mv",result);
 	}
+
+	@Override
+	public ModelAndView allListProcess() {
+		ModelAndView model=new ModelAndView("board/rest-list");
+		List<SeriesListDTO> result=srepo.findAll().stream()
+												.map(img->new SeriesListDTO(img)
+														.defImg(imgRepo.findBySeries(img)))
+												.collect(Collectors.toList());
+		
+		model.addObject("mv", result);
+		return model;
+	}
+
 	
 	
 }

@@ -32,6 +32,8 @@ $(function(){
 	
 	$(".bullet-wrap .bullet").click(bulletClicked);
 	$(".auto-wrap button span").click(playStopClicked);
+	
+	mainList();
 });
 
 function playStopClicked(){
@@ -79,3 +81,14 @@ function move(dir){
 	$(".txt .target").text($(".item.target").index()+1);
 }
 
+
+//////////////////////////////////////////////////////////////////////////
+
+function mainList(){
+	$.get(
+		"/common/list",//url
+		function(resultHtml) { //success
+			$("#list").html(resultHtml);
+		}
+	)
+}
