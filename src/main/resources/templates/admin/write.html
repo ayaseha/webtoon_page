@@ -2,16 +2,39 @@
 <html xmlns:th="//www.thymeleaf.org/" th:replace="~{ common/admin-layout :: layout( ~{this::head} , ~{this::main} ) }">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="_csrf" th:content="${_csrf.token}"/>
+		<!-- default header name is X-CSRF-TOKEN -->
+		<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+		<link rel="stylesheet" href="/css/admin/write.css">
+		<script src="/js/admin/write.js"></script>
 		<title>작품 등록</title>
 	</head>
 	<body>
 		<main>
 			<hr>
-			<div class="wrap">
+			<div class="wrap view-size">
 				<form action="/admin/write/new" method="post">
+					<p>
+						<span>작품 선택</span>
+						<select id="series" name="series">
+							<!-- 등록되어있는 시리즈 목록이 들어갑니다. -->
+						</select>
+					</p>
 					<p>
 						<span>회차 제목</span>
 						<input type="text" name="subTitle" placeholder="제목을 입력해주세요.">
+					</p>
+					<p>
+						<span>대표이미지</span>
+						<i class="img-wrap first">
+							<label >
+								<span>+</span>
+								<input type="file" onchange="tempUpload(this)">
+							</label>
+							<input type="hidden" class="bucket-key" name="bucketKey" >
+							<input type="hidden" class="org-name" name="orgName" >
+							<input type="hidden" class="new-name" name="newName" >
+						</i>
 					</p>
 					<p id="img-area">
 						<span>이미지</span>
@@ -25,11 +48,7 @@
 							<input type="hidden" class="new-name" name="newName" >
 						</i>
 					</p>
-					<p>
-						<span>줄거리</span>
-						<textarea name="synopsis" cols="100" rows="10" placeholder="줄거리를 입력해주세요."></textarea>
-					</p>
-					<p>
+					<p class="save">
 						<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 						<button>작품 등록</button>
 					</p>

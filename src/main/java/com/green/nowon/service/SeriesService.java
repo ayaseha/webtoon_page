@@ -2,6 +2,7 @@ package com.green.nowon.service;
 
 import java.util.Map;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +17,9 @@ public interface SeriesService {
 
 	void seriesListProcess(String name, Model model, int page);
 
-	ModelAndView allListProcess();
+	ModelAndView allListProcess(int page);
+
+	ModelAndView selectListProcess();
 
 
 }

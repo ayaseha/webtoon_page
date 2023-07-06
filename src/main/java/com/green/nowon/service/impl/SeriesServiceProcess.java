@@ -5,6 +5,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +26,7 @@ import com.green.nowon.domain.repository.SeriesEntityRepository;
 import com.green.nowon.domain.repository.SeriesImageEntityRepository;
 import com.green.nowon.service.SeriesService;
 import com.green.nowon.utils.FileUploadUtil;
+import com.green.nowon.utils.PageData;
 
 import lombok.RequiredArgsConstructor;
 
@@ -68,16 +75,22 @@ public class SeriesServiceProcess implements SeriesService {
 
 	@Override
 	public void seriesListProcess(String name, Model model, int page) {
-		
+//		int size=3;
+//		Pageable pageable =PageRequest.of(page-1, size, Sort.by(Direction.DESC, "sno"));
+//		
 		List<SeriesListDTO> result= srepo.findAllByCategory(Category.valueOf(name.toUpperCase())).stream()
 													.map(img->new SeriesListDTO(img)
 															.defImg(imgRepo.findBySeries(img)))
 													.collect(Collectors.toList());
+		
+//		Page<SeriesListDTO> pd=new PageImpl<>(result, pageable, srepo.countByCategory(Category.valueOf(name.toUpperCase())));
+		
 		model.addAttribute("mv",result);
+	//	model.addAttribute("pd",PageData.create(page, 4, srepo.countByCategory(Category.valueOf(name.toUpperCase()))));
 	}
 
 	@Override
-	public ModelAndView allListProcess() {
+	public ModelAndView allListProcess(int page) {
 		ModelAndView model=new ModelAndView("board/rest-list");
 		List<SeriesListDTO> result=srepo.findAll().stream()
 												.map(img->new SeriesListDTO(img)
@@ -85,7 +98,15 @@ public class SeriesServiceProcess implements SeriesService {
 												.collect(Collectors.toList());
 		
 		model.addObject("mv", result);
+		//model.addObject("pd",PageData.create(page, 4, (int)srepo.count()));
 		return model;
+	}
+
+	@Override
+	public ModelAndView selectListProcess() {
+		ModelAndView mv=new ModelAndView("admin/rest-series");
+		mv.addObject("list", srepo.findAll());
+		return mv;
 	}
 
 	

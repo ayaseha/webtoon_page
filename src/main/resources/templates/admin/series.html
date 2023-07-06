@@ -46,7 +46,7 @@
 						<span>줄거리</span>
 						<textarea name="synopsis" cols="97" rows="10" placeholder="줄거리를 입력해주세요."></textarea>
 					</p>
-					<p>
+					<p class="save">
 						<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 						<button>작품 등록</button>
 					</p>

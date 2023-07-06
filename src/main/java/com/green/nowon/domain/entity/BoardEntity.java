@@ -29,9 +29,6 @@ public class BoardEntity extends BaseDateEntity {
 	@Column(nullable = false)
 	private String subTitle;
 	
-	@Column(columnDefinition = "TEXT")
-	private String content;
-	
 	@Column(columnDefinition = "int default 0")
 	private int readCount;
 	

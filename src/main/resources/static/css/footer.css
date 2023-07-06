@@ -4,8 +4,15 @@
 footer {
 	position: absolute;
 	bottom: 20px;
+	left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+footer>div{
+	margin: 0 auto;
 }
 
 footer p {
 	margin: 10px auto;
+	text-align: center;
 }

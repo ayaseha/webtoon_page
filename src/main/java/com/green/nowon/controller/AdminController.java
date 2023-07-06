@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.green.nowon.domain.dto.SeriesSaveDTO;
+import com.green.nowon.domain.entity.Category;
 import com.green.nowon.service.SeriesService;
 
 import lombok.RequiredArgsConstructor;
@@ -48,6 +50,12 @@ public class AdminController {
 	public ResponseEntity<Map<String, String>> tempUpload(MultipartFile tempImg){
 		return ResponseEntity.ok()
 				.body(seDao.tempUpload(tempImg));//success: function(result){/*result로 path 전달*/}
+	}
+	
+	@ResponseBody // ModelAndView : html을 을 리턴
+	@GetMapping("/admin/series/list")
+	public ModelAndView seriesList() {
+		return seDao.selectListProcess();
 	}
 	
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="//www.thymeleaf.org">
 	<th:block th:each="dto:${list}">
-		<option class="cate" th:value="${dto.no}" th:text="${dto.name}">카테고리이름</option>
+		<option th:value="${dto.sno}" th:text="${dto.title}">시리즈 제목</option>
 	</th:block>
 </html>
