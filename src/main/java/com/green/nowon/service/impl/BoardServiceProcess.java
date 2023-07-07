@@ -2,6 +2,7 @@ package com.green.nowon.service.impl;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.green.nowon.domain.dto.BoardImgSaveDTO;
@@ -32,25 +33,25 @@ public class BoardServiceProcess implements BoardService {
 	@Override
 	public void boardSaveProcess(BoardImgSaveDTO dto) {
 		
-		BoardEntity entity= BoardEntity.builder()
+		BoardEntity entity= brepo.save(BoardEntity.builder()
 				.subTitle(dto.getSubTitle())
 				.series(dto.getSeries())
-				.build();
+				.build());
+		
 		
 		String[] bucketKeies=dto.getBucketKey();
 		String[] orgNames=dto.getOrgName();
 		String[] newNames=dto.getNewName();
 		
 		for(int i=0; i<bucketKeies.length; i++) {
-			if(bucketKeies[i]==null || bucketKeies[i]=="")continue;
+			if(bucketKeies[i]==null || bucketKeies[i].equals(""))continue;
 			String newName=newNames[i];
 			String orgName=orgNames[i];
 			String uploadKey=UPLOAD_PATH+newName;
 			String url=FileUploadUtil.s3TempToSrc(s3Client, BUCKET, bucketKeies[i], uploadKey);
 			if(i==0) {
-
 				irepo.save(ImgEntity.builder()
-						.bucketKey(bucketKeies[i])
+						.bucketKey(uploadKey)
 						.isDef(true).isList(true)
 						.url(url).orgName(orgName).newName(newName)
 						.board(entity)
@@ -58,7 +59,8 @@ public class BoardServiceProcess implements BoardService {
 			}else {
 			
 				irepo.save(ImgEntity.builder()
-						.bucketKey(bucketKeies[i])
+						.bucketKey(uploadKey)
+						.isDef(false)
 						.isList(true)
 						.url(url).orgName(orgName).newName(newName)
 						.board(entity)
@@ -67,6 +69,13 @@ public class BoardServiceProcess implements BoardService {
 			
 			
 		}
+		
+	}
+
+	@Override
+	public void ListProcess(long sno, Model model) {
+		
+		brepo.findAllBySeries(sno);
 		
 	}
 

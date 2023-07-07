@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="//www.thymeleaf.org">
-	<th:block th:each="dto:${list}">
-		<option class="cate" th:value="${dto.no}" th:text="${dto.name}">카테고리이름</option>
-	</th:block>
+	<div th:each="menu:${list}">
+		<a th:href="|/web/${menu.name().toLowerCase()}|" th:text="${menu.getKoName()}">카테고리이름</a>
+	</div>
 </html>

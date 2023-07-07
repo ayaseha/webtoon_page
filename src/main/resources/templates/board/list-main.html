@@ -13,7 +13,7 @@
 			<div class="wrap view-size">
 				<ul class="flex">
 					<li th:each="list : ${mv}">
-						<a href="#">
+						<a th:href="|/web/${#strings.toLowerCase(list.category)}/${list.sno}|">
 							<img th:alt="${list.title}" th:src="${list.url}">
 							<i class="info">
 								<span class="title" th:text="${list.title}">제목</span>

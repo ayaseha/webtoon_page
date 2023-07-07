@@ -43,7 +43,10 @@ $(function(){
 			 
 			 var targetIdx=$(fileTag).parents(".img-wrap").index()+1;
 			 
-			 spanHide()
+			 var tagLength= $("#img-area>.img-wrap").length;
+			 console.log(targetIdx+" / "+ tagLength)
+			 
+			 
 			 var  tag=`
 				<i class="img-wrap">
 					<label>
@@ -55,9 +58,13 @@ $(function(){
 					<input type="hidden" class="new-name" name="newName" >
 				</i>
 				`
-			if(target.parents(".first")){
+				console.log()
+			if(targetIdx>tagLength && !target.parents().hasClass("first")){
+				spanHide()
 				$("#img-area").append(tag);
 			 }
+			
+			
 		 }
 	 })
 	 //*/

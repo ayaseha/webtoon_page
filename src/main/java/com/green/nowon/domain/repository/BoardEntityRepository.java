@@ -6,4 +6,6 @@ import com.green.nowon.domain.entity.BoardEntity;
 
 public interface BoardEntityRepository extends JpaRepository<BoardEntity, Long> {
 
+	void findAllBySeries(long sno);
+
 }

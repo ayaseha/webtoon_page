@@ -24,7 +24,7 @@ public class ImgEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long no;
+	private long ino;
 	@Column(nullable = false)
 	private String url; //s3경로
 	@Column(nullable = false)
