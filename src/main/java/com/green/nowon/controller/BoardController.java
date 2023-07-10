@@ -2,6 +2,7 @@ package com.green.nowon.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,4 +42,18 @@ public class BoardController {
 		boDao.ListProcess(sno,model);
 		return "board/list";
 	}
+	
+	@GetMapping("/web/{name}/{sno}/{bno}")
+	public String details(@PathVariable String name, @PathVariable long sno, @PathVariable long bno, Model model) {
+		boDao.boardDetails(bno,model);
+		return "board/details";
+	}
+	
+	@DeleteMapping("/web/{name}/{sno}/{bno}")
+	public String deleteBoard(@PathVariable String name, @PathVariable long sno, @PathVariable long bno) {
+		boDao.deleteProcess(bno);
+		return "redirect:/";
+	}
+	
+	
 }

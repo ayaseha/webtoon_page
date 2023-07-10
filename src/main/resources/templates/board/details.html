@@ -1,6 +1,21 @@
 <!DOCTYPE html> <!-- 카테고리>시리즈>작품// 세부 페이지 -->
-<html xmlns:th="//www.thymeleaf.org/">
+<html xmlns:th="//www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{ common/layout2 :: layout( ~{this::head} , ~{this::main} ) }">
+	<head>
+		<link rel="stylesheet" href="/css/board/details.css">
+		<meta name="_csrf" th:content="${_csrf.token}"/>
+		<!-- default header name is X-CSRF-TOKEN -->
+		<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+	</head>
 	<body>
-		
+		<main>
+			<div th:each="de : ${detail}">
+				<img th:alt="${de.board.subTitle}" th:src="${de.url}">
+			</div>
+			<form action="|/delete/${de.board.bno}|" method="post" sec:authorize="hasRole('ROLE_ADMIN')">
+				<input type="hidden" name="_method" value="DELETE">
+				<button>회차 삭제</button>
+			</form>
+		</main>
 	</body>
 </html>

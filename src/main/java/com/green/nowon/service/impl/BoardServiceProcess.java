@@ -1,11 +1,17 @@
 package com.green.nowon.service.impl;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.green.nowon.domain.dto.BoardImgSaveDTO;
+import com.green.nowon.domain.dto.BoardListDTO;
 import com.green.nowon.domain.entity.BoardEntity;
 import com.green.nowon.domain.entity.ImgEntity;
 import com.green.nowon.domain.repository.BoardEntityRepository;
@@ -74,8 +80,35 @@ public class BoardServiceProcess implements BoardService {
 
 	@Override
 	public void ListProcess(long sno, Model model) {
+		List<BoardListDTO> result=brepo.findBySeriesSno(sno).stream()
+				.map(img->new BoardListDTO(img).defImg(irepo.findByBoardBnoAndIsDef(img.getBno(),true)))
+				.collect(Collectors.toList());
+		model.addAttribute("board", result);
 		
-		brepo.findAllBySeries(sno);
+	}
+
+	@Override
+	public void boardDetails(long bno, Model model) {
+		List<ImgEntity> result=irepo.findAllByBoardBno(bno).stream().collect(Collectors.toList());
+		
+		
+		model.addAttribute("detail",result);
+		//model.addAttribute("rm",result);
+		
+	}
+
+	@Override
+	public void deleteProcess(long bno) {
+		List<ImgEntity> img= irepo.findAllByBoardBno(bno);
+		
+		for(int i=0; i<img.size(); i++) {
+			String bucketKey=img.get(i).getBucketKey();
+			s3Client.deleteObject(BUCKET, bucketKey);
+		}
+		
+		irepo.deleteByBoardBno(bno);
+		brepo.deleteById(bno);
+
 		
 	}
 

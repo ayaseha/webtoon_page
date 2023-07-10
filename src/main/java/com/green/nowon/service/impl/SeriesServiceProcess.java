@@ -75,18 +75,16 @@ public class SeriesServiceProcess implements SeriesService {
 
 	@Override
 	public void seriesListProcess(String name, Model model, int page) {
-//		int size=3;
-//		Pageable pageable =PageRequest.of(page-1, size, Sort.by(Direction.DESC, "sno"));
-//		
+		int size=4;
+		Pageable pageable =PageRequest.of(page-1, size, Sort.by(Direction.DESC, "sno"));
 		List<SeriesListDTO> result= srepo.findAllByCategory(Category.valueOf(name.toUpperCase())).stream()
 													.map(img->new SeriesListDTO(img)
 															.defImg(imgRepo.findBySeries(img)))
 													.collect(Collectors.toList());
 		
-//		Page<SeriesListDTO> pd=new PageImpl<>(result, pageable, srepo.countByCategory(Category.valueOf(name.toUpperCase())));
+		Page<SeriesListDTO> pd=new PageImpl<>(result, pageable, result.size());
 		
-		model.addAttribute("mv",result);
-	//	model.addAttribute("pd",PageData.create(page, 4, srepo.countByCategory(Category.valueOf(name.toUpperCase()))));
+		model.addAttribute("mv",pd.getContent());
 	}
 
 	@Override

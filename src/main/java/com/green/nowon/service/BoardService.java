@@ -10,5 +10,9 @@ public interface BoardService {
 
 	void ListProcess(long sno, Model model);
 
+	void boardDetails(long bno, Model model);
+
+	void deleteProcess(long bno);
+
 
 }

@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+div:first-child {
+	margin-top: 100px;
+}
+
+div img{
+	width: 800px;
+	margin-left: 20%;
+}

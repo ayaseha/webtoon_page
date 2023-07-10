@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+div ul li a {
+	display: block;
+}
+
+div ul li a span{
+	display: inline-block;
+	width: 100px;
+	vertical-align: middle;
+	margin-right: 10px;
+	margin-left: 20px;
+}
+
+div ul li a span:first-child{
+	padding-left: 20px; 
+}
+
+div ul li a span img {
+	display: block;
+	width: 100px;
+    height: 80px;
+}
+
+div ul:first-child li{
+	display: flex;
+	padding: 20px;
+	width: 100px;
+	justify-content: center;
+	border-right: 1px solid #999;
+}
+

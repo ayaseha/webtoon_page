@@ -54,3 +54,4 @@ h1{position: absolute; left: -9999px; font-size: 0}
 .flex{display: flex;}
 .center{justify-content: center;}
 .end{justify-content: flex-end;}
+.between{justify-content: space-between;}
