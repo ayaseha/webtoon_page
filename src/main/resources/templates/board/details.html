@@ -12,7 +12,11 @@
 			<div th:each="de : ${detail}">
 				<img th:alt="${de.board.subTitle}" th:src="${de.url}">
 			</div>
-			<form action="|/delete/${de.board.bno}|" method="post" sec:authorize="hasRole('ROLE_ADMIN')">
+			<a th:href="|/web/${#strings.toLowerCase(rm.series.category)}/${rm.series.sno}/${rm.bno}/update|"
+				sec:authorize="hasRole('ROLE_ADMIN')" class="update">수정</a>
+			<form th:action="|/web/${#strings.toLowerCase(rm.series.category)}/${rm.series.sno}/${rm.bno}|" 
+			method="post" sec:authorize="hasRole('ROLE_ADMIN')" class="del">
+				<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				<input type="hidden" name="_method" value="DELETE">
 				<button>회차 삭제</button>
 			</form>

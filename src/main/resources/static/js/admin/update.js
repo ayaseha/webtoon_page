@@ -2,7 +2,7 @@
  * 
  */
 $(function(){
-
+	seriesList()
 });
 
  function tempUpload(fileTag){
@@ -41,10 +41,33 @@ $(function(){
 			 target.parents(".img-wrap").find(".new-name")
 			 	.val(map.newName);	
 			 
+			 var targetIdx=$(fileTag).parents(".img-wrap").index()+1;
+			 
+			 var tagLength= $("#img-area>.img-wrap").length;
+			 console.log(targetIdx+" / "+ tagLength)
+			 
+			 
+			 var  tag=`
+				<i class="img-wrap">
+					<label>
+						<span>+</span>
+						<input type="file" onchange="tempUpload(this)">
+					</label>
+					<input type="hidden" class="bucket-key" name="bucketKey" >
+					<input type="hidden" class="org-name" name="orgName" >
+					<input type="hidden" class="new-name" name="newName" >
+				</i>
+				`
+				console.log()
+			if(targetIdx>tagLength && !target.parents().hasClass("first")){
+				spanHide()
+				$("#img-area").append(tag);
+			 }
+			
+			
 		 }
 	 })
 	 //*/
-	 spanHide()
  }
  
  function spanHide() {
@@ -52,3 +75,4 @@ $(function(){
 	
 	target.addClass("hide")
  }
+ 

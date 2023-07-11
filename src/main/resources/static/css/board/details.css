@@ -6,5 +6,16 @@ div:first-child {
 
 div img{
 	width: 800px;
-	margin-left: 20%;
+	margin: 0 30%;
+}
+
+.del {
+	float: right;
+	margin-right: 300px;
+}
+
+.del>button {
+	width: 100px;
+	height: 36px;
+	font-size: 16px;
 }

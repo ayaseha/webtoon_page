@@ -14,5 +14,7 @@ public interface BoardService {
 
 	void deleteProcess(long bno);
 
+	void updateProcess(long bno, BoardImgSaveDTO dto);
+
 
 }

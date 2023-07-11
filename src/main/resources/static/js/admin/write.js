@@ -25,7 +25,7 @@ $(function(){
 		 beforeSend:function(xhr) {//csrf적용시 
 			xhr.setRequestHeader(header, token); 
 		 },		
-		 url:"/admin/series/temp",
+		 url:"/admin/temp",
 		 type:"post",
 		 data: formData,
 		 contentType:false,

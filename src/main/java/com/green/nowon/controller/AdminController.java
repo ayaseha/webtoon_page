@@ -45,7 +45,7 @@ public class AdminController {
 		return "redirect:/admin";
 	}
 	
-	@PostMapping("/admin/series/temp")
+	@PostMapping("/admin/temp")
 	@ResponseBody
 	public ResponseEntity<Map<String, String>> tempUpload(MultipartFile tempImg){
 		return ResponseEntity.ok()
