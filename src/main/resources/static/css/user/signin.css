@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 main .wrap form{
-	width: 300px;
+	width: 320px;
 	margin: 0 auto;
 	padding-top: 36px;
 }
@@ -36,7 +36,13 @@ main .wrap form p button {
 	background-color: #ff80c0;
 	border-radius: 0.2em;
 }
-
+.wrap>.error>span {
+	text-align: center;
+	display: block;
+	color: red;
+	margin: 10px auto;
+	padding-left: 20px;
+}
 
 /* /////////////////////////////////////////// */
 /* //////////////////비번찾기/////////////////// */

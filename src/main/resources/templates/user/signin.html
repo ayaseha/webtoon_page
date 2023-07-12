@@ -10,6 +10,9 @@
 	<main class="view-size">
 		<h1>로그인폼</h1>
 		<div class="wrap">
+			<div class="error" th:if="${param.error}">
+					<span>아이디나 비밀번호가 올바르지 않습니다.</span>
+			</div>
 			<form action="/signin" method="post">
 				<p>
 					<input type="text" name="email" placeholder="이메일">

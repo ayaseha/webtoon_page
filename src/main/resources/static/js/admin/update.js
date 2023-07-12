@@ -2,7 +2,7 @@
  * 
  */
 $(function(){
-	seriesList()
+	
 });
 
  function tempUpload(fileTag){

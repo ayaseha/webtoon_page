@@ -26,7 +26,7 @@ function regExpCheck(){
 
 	
 	if(target=="email"){
-		regExp =  /^[\da-zA-Z]([-_.]?[0-9a-zA-Z])*@[\da-zA-Z]([-_.]?[\da-zA-Z])*\.[a-zA-Z]{2,4}$/i;
+		regExp =  /^[\da-zA-Z]([-_.]?[0-9a-zA-Z])*@[\da-zA-Z]([-_.]?[\da-zA-Z])*\.[a-zA-Z.]{3,5}$/i;
 	}else if(target=="password"){
 		regExp =  /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z]).*$/g;
 	}else if(target=="nickName"){

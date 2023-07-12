@@ -12,5 +12,7 @@ public interface SeriesImageEntityRepository extends JpaRepository<SeriesImgEnti
 
 	SeriesImgEntity findBySeries(SeriesEntity sno);
 
+	SeriesImgEntity findBySeriesSno(long sno);
+
 
 }

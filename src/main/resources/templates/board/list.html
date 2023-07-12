@@ -8,7 +8,18 @@
 	<!--카테고리>시리즈// 회차 리스트 -->
 		<main>
 		<hr>
-			<div class="view-size">
+		<div class="series-detail flex">
+			<div class="thum">
+				<img alt="섬네일" th:src="${thum.url}">
+			</div>
+			<div class="detail">
+				<p th:text="${thum.series.title}">제목</p>
+				<span th:text="${thum.series.writer}">작가명</span> 
+				<span th:text="${thum.series.synopsis}">줄거리</span>
+			</div>
+		</div>
+		<hr>
+		<div class="view-size">
 				<ul class="flex">
 					<li>글번호</li>
 					<li>섬네일</li>

@@ -1,8 +1,6 @@
 package com.green.nowon.service.impl;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -15,8 +13,10 @@ import com.green.nowon.domain.dto.BoardListDTO;
 import com.green.nowon.domain.dto.ImageListDTO;
 import com.green.nowon.domain.entity.BoardEntity;
 import com.green.nowon.domain.entity.ImgEntity;
+import com.green.nowon.domain.entity.SeriesImgEntity;
 import com.green.nowon.domain.repository.BoardEntityRepository;
 import com.green.nowon.domain.repository.BoardImageEntityRepository;
+import com.green.nowon.domain.repository.SeriesImageEntityRepository;
 import com.green.nowon.service.BoardService;
 import com.green.nowon.utils.FileUploadUtil;
 
@@ -29,6 +29,8 @@ public class BoardServiceProcess implements BoardService {
 	private final AmazonS3Client s3Client;
 	private final BoardEntityRepository brepo;
 	private final BoardImageEntityRepository irepo;
+	
+	private final SeriesImageEntityRepository siRepo;
 	
 	@Value("${cloud.aws.s3.bucket.temp}")
 	private String TEMP_PATH;
@@ -84,7 +86,9 @@ public class BoardServiceProcess implements BoardService {
 		List<BoardListDTO> result=brepo.findBySeriesSno(sno).stream()
 				.map(img->new BoardListDTO(img).defImg(irepo.findByBoardBnoAndIsDef(img.getBno(),true)))
 				.collect(Collectors.toList());
+		SeriesImgEntity thum=siRepo.findBySeriesSno(sno);
 		model.addAttribute("board", result);
+		model.addAttribute("thum",thum);
 		
 	}
 
@@ -116,7 +120,6 @@ public class BoardServiceProcess implements BoardService {
 
 	@Override
 	public void updateProcess(long bno, BoardImgSaveDTO dto) {
-		//기존에 저장 메서드와 거의 비슷
 		BoardEntity boardEntity=brepo.findById(bno).orElseThrow();
 		
 		List<ImageListDTO> oldImg=irepo.findAllByBoardBno(bno).stream()
@@ -129,28 +132,42 @@ public class BoardServiceProcess implements BoardService {
 		String[] newNames=dto.getNewName();
 		
 		for(int i=0; i<bucketKeies.length; i++) {
-			if(bucketKeies[i]==null || bucketKeies[i].equals("")
-					|| bucketKeies[i]==oldImg.get(i).getBucketKey())continue;
+			if(bucketKeies[i]==null || bucketKeies[i].equals(""))continue;
 			String newName=newNames[i];
 			String orgName=orgNames[i];
 			String uploadKey=UPLOAD_PATH+newName;
 			String url;
-			
-			if(bucketKeies[i]!=oldImg.get(i).getBucketKey()) {
-				url=FileUploadUtil.s3TempToSrc(s3Client, BUCKET, bucketKeies[i], uploadKey);
-				s3Client.deleteObject(BUCKET, oldImg.get(i).getBucketKey());
-				irepo.save(
-						irepo.save(ImgEntity.builder()
-								.ino(oldImg.get(i).getIno())
-								.bucketKey(uploadKey)
-								.isDef(oldImg.get(i).isDef())
-								.isList(oldImg.get(i).isList())
-								.url(url).orgName(orgName).newName(newName)
-								.board(boardEntity)
-								.build()));
-			}else if(bucketKeies.length> oldImg.size()) {
+			for(int j=0; j<oldImg.size(); j++) {
+				if(bucketKeies[i]==oldImg.get(j).getBucketKey())continue;
+				if(j==i && !bucketKeies[i].equals(oldImg.get(j).getBucketKey())) {
+					System.out.println("현재 체크하는 bucketkey :"+bucketKeies[i]);
+					System.out.println("기존 bucketkey :"+oldImg.get(j).getBucketKey());
+					url=FileUploadUtil.s3TempToSrc(s3Client, BUCKET, bucketKeies[i], uploadKey);
+					s3Client.deleteObject(BUCKET, oldImg.get(j).getBucketKey());
+					irepo.save(
+							irepo.save(ImgEntity.builder()
+									.ino(oldImg.get(j).getIno())
+									.bucketKey(uploadKey)
+									.isDef(oldImg.get(j).isDef())
+									.isList(oldImg.get(j).isList())
+									.url(url).orgName(orgName).newName(newName)
+									.board(boardEntity)
+									.build()));
+					
+				}else if(i>oldImg.size()-1 && j!=i) {
+					System.out.println("새로운 bucketkey :"+bucketKeies[i]);
+					url=FileUploadUtil.s3TempToSrc(s3Client, BUCKET, bucketKeies[i], uploadKey);
+					irepo.save(ImgEntity.builder()
+							.bucketKey(uploadKey)
+							.isDef(false).isList(true)
+							.url(url).orgName(orgName).newName(newName)
+							.board(boardEntity)
+							.build());
+					break;
+				}
 				
 			}
+
 		}
 		
 	}

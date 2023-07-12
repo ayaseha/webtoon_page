@@ -5,17 +5,41 @@ div:first-child {
 }
 
 div img{
-	width: 800px;
-	margin: 0 30%;
+	display: block;
+	width: 80%;
+	margin: 0 auto;
 }
 
-.del {
+.btn-wrap {
 	float: right;
-	margin-right: 300px;
+}
+.btn-wrap a{
+	display: inline-block;
+	width: 100px;
+	height: 33px;
+	border: 1px solid #a9a9a9;
+	border-right: none;
+	text-align: center;
+    line-height: 2;	
+    background-color: #ffd9ec;
 }
 
-.del>button {
+.btn-wrap>form>button {
+	position: relative;
+	margin-right: 300px;
 	width: 100px;
 	height: 36px;
 	font-size: 16px;
+	border: 1px solid #a9a9a9;
+	background-color: #ffd9ec;
+}
+
+.btn-wrap>button {
+	position: relative;
+	margin-right: 100px;
+	width: 100px;
+	height: 36px;
+	font-size: 16px;
+	border: 1px solid #a9a9a9;
+	background-color: #ffd9ec;
 }

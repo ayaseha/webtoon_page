@@ -13,9 +13,9 @@ public abstract class BaseDateEntity {
 	
 	@CreationTimestamp
 	@Column(columnDefinition = "timestamp(6) not null")
-	LocalDateTime createdDate;
+	private LocalDateTime createdDate;
 	
 	@UpdateTimestamp
 	@Column(columnDefinition = "timestamp(6) null")
-	LocalDateTime updatedDate;
+	private LocalDateTime updatedDate;
 }

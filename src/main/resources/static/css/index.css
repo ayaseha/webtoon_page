@@ -3,6 +3,7 @@
 /* /////// visual ////////////////////// */
 /* ///////////////////////////////////// */
 #visual>.wrap{
+	width: 1080px;
 	position: relative;
 	height:300px;
 	margin: 0 auto;
@@ -64,7 +65,7 @@
 #visual>.wrap .bullet-wrap{
 	position: absolute;
 	bottom: 20px;
-	left: calc(50% - 110px);
+	left: calc(50% - 65px);
 }
 #visual>.wrap .bullet-wrap .bullet:hover{
 	cursor: pointer;
@@ -72,9 +73,9 @@
 	color: #f00;
 }
 #visual>.wrap .bullet-wrap .bullet{
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
 	text-align: center;
 	background-color: rgba(255,255,255,75%);
 	border-radius: 50%;
@@ -88,7 +89,6 @@
 #visual>.wrap .auto-wrap{
 	position: absolute;
 	bottom: 40px;
-	line-height: 40px;
 	left: 40px;
 	display: inline-flex;
 	font-size: 20px;
@@ -103,7 +103,11 @@
   'FILL' 0,
   'wght' 400,
   'GRAD' 0,
-  'opsz' 48
+  'opsz' 48;
+	border: 1px solid #a9a9a9;
+	background-color: #a9a9a9;
+	border-radius: 50%;
+	color: white;
 }
 
 /* /////// visual ////////////////////// */
