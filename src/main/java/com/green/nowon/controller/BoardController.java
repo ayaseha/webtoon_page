@@ -41,8 +41,8 @@ public class BoardController {
 	
 	//회차리스트 이동
 	@GetMapping("/web/{name}/{sno}")
-	public String contentMain(@PathVariable String name, @PathVariable long sno, Model model) {
-		boDao.ListProcess(sno,model);
+	public String contentMain(@PathVariable String name, @PathVariable long sno, Model model, @RequestParam(defaultValue = "1") int page) {
+		boDao.ListProcess(sno,model,page);
 		return "board/list";
 	}
 	

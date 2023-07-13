@@ -9,7 +9,10 @@ div ul li a span{
 	width: 100px;
 	vertical-align: middle;
 	margin-right: 10px;
-	margin-left: 20px;
+}
+
+div .ul-wrap li a span:nth-child(3) {
+	padding-left: 50px;
 }
 
 div ul li a span:first-child{
@@ -17,9 +20,11 @@ div ul li a span:first-child{
 }
 
 div ul li a span img {
+	position: inherit;
 	display: block;
-	width: 100px;
+	width: 140px;
     height: 80px;
+    padding-left: 5px;
 }
 
 div ul:first-child li{
@@ -30,3 +35,33 @@ div ul:first-child li{
 	border-right: 1px solid #999;
 }
 
+/* ///////////////////섬네일//////////////////////// */
+
+.series-detail> .thum > img {
+	width: 150px;
+	height: 200px;
+}
+
+.series-detail> .thum {
+	margin-left: 15%;
+}
+
+.series-detail> .detail {
+	margin: 5%;
+}
+
+.series-detail> .detail p {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.series-detail> .detail span:first-of-type {
+	font-size: 12px;
+	display: block;
+	margin: 10px;	
+}
+
+.series-detail> .detail span:nth-of-type(2) {
+	font-size: 14px;
+	display: block;
+}

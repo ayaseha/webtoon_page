@@ -1,12 +1,6 @@
 @charset "UTF-8";
 
-.noContent {
-	display: block;
-	width: 600px;
-	height: 800px;
-	margin: 50px auto;
-	text-align: center;
-}
+
 .wrap > ul > li>a>img {
 	display: block;
 	width: 200px;

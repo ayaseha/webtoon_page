@@ -26,6 +26,7 @@
 					<li>제목</li>
 				</ul>
 				<hr>
+					<p class="noContent" th:if="${board.isEmpty}">게시글이 존재하지 않습니다.</p>
 					<ul class="ul-wrap" th:each="dto:${board}">
 						<li>
 							<a th:href="|/web/${#strings.toLowerCase(dto.series.category)}/${dto.series.sno}/${dto.bno}|">
@@ -35,7 +36,15 @@
 							</a>
 						</li>
 					</ul>
+				<div class="page-wrap flex center">
+					<th:block th:each="no : ${#numbers.sequence(1,tot)}">
+					<th:block th:each="dto:${board}">
+					<a th:href="@{|/web/${#strings.toLowerCase(dto.series.category)}/${dto.series.sno}?page=${no}|}" th:text="${no}">페이지번호</a>
+					</th:block>
+					</th:block>
+				</div>
 			</div>
+				
 		</main>
 	</body>
 </html>

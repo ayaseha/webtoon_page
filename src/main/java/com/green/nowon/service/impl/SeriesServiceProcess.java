@@ -85,6 +85,9 @@ public class SeriesServiceProcess implements SeriesService {
 		Page<SeriesListDTO> pd=new PageImpl<>(result, pageable, result.size());
 		
 		model.addAttribute("mv",pd.getContent());
+		model.addAttribute("tot",pd.getTotalPages());
+		
+		
 	}
 
 	@Override

@@ -4,13 +4,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.green.nowon.domain.dto.BoardImgSaveDTO;
 import com.green.nowon.domain.dto.BoardListDTO;
 import com.green.nowon.domain.dto.ImageListDTO;
+import com.green.nowon.domain.dto.SeriesListDTO;
 import com.green.nowon.domain.entity.BoardEntity;
 import com.green.nowon.domain.entity.ImgEntity;
 import com.green.nowon.domain.entity.SeriesImgEntity;
@@ -82,12 +90,18 @@ public class BoardServiceProcess implements BoardService {
 	}
 
 	@Override
-	public void ListProcess(long sno, Model model) {
+	public void ListProcess(long sno, Model model, int page) {
+		int size=12;
+		Pageable pageable =PageRequest.of(page-1, size, Sort.by(Direction.DESC, "bno"));
 		List<BoardListDTO> result=brepo.findBySeriesSno(sno).stream()
 				.map(img->new BoardListDTO(img).defImg(irepo.findByBoardBnoAndIsDef(img.getBno(),true)))
 				.collect(Collectors.toList());
 		SeriesImgEntity thum=siRepo.findBySeriesSno(sno);
+		
+		Page<BoardListDTO> pd=new PageImpl<>(result, pageable, result.size());
+		
 		model.addAttribute("board", result);
+		model.addAttribute("tot",pd.getTotalPages());
 		model.addAttribute("thum",thum);
 		
 	}

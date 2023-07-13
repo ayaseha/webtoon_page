@@ -8,7 +8,7 @@ public interface BoardService {
 
 	void boardSaveProcess(BoardImgSaveDTO dto);
 
-	void ListProcess(long sno, Model model);
+	void ListProcess(long sno, Model model,int page);
 
 	void boardDetails(long bno, Model model);
 
