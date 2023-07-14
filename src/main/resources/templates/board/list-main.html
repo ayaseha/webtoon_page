@@ -26,6 +26,12 @@
 						</a>
 					</li>
 				</ul>
+				<div>
+					
+					<th:block th:each="no : ${#numbers.sequence(1,tot)}">
+					<a th:href="@{|/web/${#strings.toLowerCase(mv[0].getCategory())}?page=${no}|}" th:text="${no}">페이지번호</a>
+					</th:block>
+				</div>
 			</div>
 		</main>
 	</body>

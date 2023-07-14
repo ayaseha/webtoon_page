@@ -75,7 +75,7 @@ public class SeriesServiceProcess implements SeriesService {
 
 	@Override
 	public void seriesListProcess(String name, Model model, int page) {
-		int size=4;
+		int size=12;
 		Pageable pageable =PageRequest.of(page-1, size, Sort.by(Direction.DESC, "sno"));
 		List<SeriesListDTO> result= srepo.findAllByCategory(Category.valueOf(name.toUpperCase())).stream()
 													.map(img->new SeriesListDTO(img)
@@ -83,8 +83,7 @@ public class SeriesServiceProcess implements SeriesService {
 													.collect(Collectors.toList());
 		
 		Page<SeriesListDTO> pd=new PageImpl<>(result, pageable, result.size());
-		
-		model.addAttribute("mv",pd.getContent());
+		model.addAttribute("mv",result);
 		model.addAttribute("tot",pd.getTotalPages());
 		
 		

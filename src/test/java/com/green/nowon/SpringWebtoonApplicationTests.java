@@ -48,7 +48,7 @@ class SpringWebtoonApplicationTests {
 		
 	}
 	
-	@Test
+	//@Test
 	void seriesCreate() {
 		
 		for (int i=1; i<=100; i++) {
