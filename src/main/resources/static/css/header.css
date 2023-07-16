@@ -46,6 +46,13 @@ header {
 	color: #ffeef6;
 	font-weight: 600
 }
+
+#user>span{
+	padding-left: 5px;
+	color: #ffeef6;
+	font-weight: 600;
+	padding-right: 5px;
+}
 #user a:first-of-type {
 	padding-right: 12px;
 	border-right: 1px solid #ffeef6;
@@ -61,4 +68,5 @@ header {
 	background-color: unset;
 	line-height: 1;
 	padding-left: 10px;
+	border-left: 1px solid #ffeef6;
 }

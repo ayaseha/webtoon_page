@@ -53,7 +53,7 @@ class SpringWebtoonApplicationTests {
 //		System.out.println(imgRepo.findBySeries(srepo.findById(3L).orElseThrow())); ;
 	}
 	
-	@Test
+	//@Test
 	void seriesCreate() {
 		
 		for (int i=101; i<=150; i++) {

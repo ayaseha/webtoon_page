@@ -11,6 +11,7 @@
 		</div>
 		<div id="user" class="flex">
 			<a href="/admin" sec:authorize="hasRole('ROLE_ADMIN')">관리자 페이지</a>
+			<span sec:authorize="isAuthenticated()" sec:authentication="principal.nick">닉네임</span><span sec:authorize="isAuthenticated()">님</span>
 			<span sec:authorize="isAnonymous()">
 			<a href="/signin">로그인</a>
 			<a href="/signup">회원가입</a>
