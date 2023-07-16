@@ -9,7 +9,6 @@
 	</head>
 	<body>
 		<main>
-			<hr>
 			<p class="noContent" th:if="${mv.isEmpty}">게시글이 존재하지 않습니다.</p>
 			<div class="wrap view-size">
 				<ul class="flex">
@@ -26,11 +25,16 @@
 						</a>
 					</li>
 				</ul>
-				<div>
-					
-					<th:block th:each="no : ${#numbers.sequence(1,tot)}">
-					<a th:href="@{|/web/${#strings.toLowerCase(mv[0].getCategory())}?page=${no}|}" th:text="${no}">페이지번호</a>
-					</th:block>
+				<div class="page-wrap flex center" th:unless="${#lists.isEmpty(mv)}">
+					<div th:if="${pd.from > 1}">
+						<a  th:href="@{|/web/${#strings.toLowerCase(mv[0].getCategory())}?page=${pd.from-1}|}" >&lt;</a>
+					</div>
+					<div th:each="page : ${#numbers.sequence(pd.from,pd.to)}">
+						<a th:href="@{|/web/${#strings.toLowerCase(mv[0].getCategory())}?page=${page}|}" th:text="${page}">페이지번호</a>
+					</div>
+					<div th:if="${pd.to < pd.tot}">
+						<a  th:href="@{|/web/${#strings.toLowerCase(mv[0].getCategory())}?page=${pd.to+1}|}" >&gt;</a>
+					</div>
 				</div>
 			</div>
 		</main>

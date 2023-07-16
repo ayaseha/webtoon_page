@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="//www.thymeleaf.org/" th:replace="~{ common/admin-layout :: layout( ~{this::head} , ~{this::main} ) }">
 	<head>
-		<link rel="stylesheet" href="/css/index.css">
+		<link rel="stylesheet" href="/css/admin/default.css">
 	</head>
 	<body>
 		<h1>관리자 페이지</h1>
-		<main>
-			<hr>
+		<main class="view-size">
 			<p>관리자 기본 화면</p>
 			<hr>
 			<a href="/admin/series">작품 시리즈 등록</a>
 			<a href="/admin/write">신규 회차 등록</a>
+			<div>
+				
+			</div>
 		</main>
 	</body>
 </html>

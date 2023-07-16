@@ -75,16 +75,19 @@ public class SeriesServiceProcess implements SeriesService {
 
 	@Override
 	public void seriesListProcess(String name, Model model, int page) {
-		int size=12;
-		Pageable pageable =PageRequest.of(page-1, size, Sort.by(Direction.DESC, "sno"));
-		List<SeriesListDTO> result= srepo.findAllByCategory(Category.valueOf(name.toUpperCase())).stream()
+		if(page<1)page=1;
+		int limit=12; //한 화면에 보이는 개수
+		Pageable pageable =PageRequest.of(page-1, limit, Sort.by(Direction.DESC, "sno"));
+		List<SeriesListDTO> result= srepo.findAllByCategory(Category.valueOf(name.toUpperCase()),pageable).stream()
 													.map(img->new SeriesListDTO(img)
 															.defImg(imgRepo.findBySeries(img)))
 													.collect(Collectors.toList());
 		
 		Page<SeriesListDTO> pd=new PageImpl<>(result, pageable, result.size());
 		model.addAttribute("mv",result);
-		model.addAttribute("tot",pd.getTotalPages());
+//		model.addAttribute("tot", pd.getTotalElements());
+		model.addAttribute("pd", PageData.create(page, limit, srepo.countByCategory(Category.valueOf(name.toUpperCase())), 10));
+
 		
 		
 	}
@@ -92,13 +95,16 @@ public class SeriesServiceProcess implements SeriesService {
 	@Override
 	public ModelAndView allListProcess(int page) {
 		ModelAndView model=new ModelAndView("board/rest-list");
-		List<SeriesListDTO> result=srepo.findAll().stream()
+		if(page<1)page=1;
+		int limit=12; //한 화면에 보이는 개수
+		Pageable pageable =PageRequest.of(page-1, limit, Sort.by(Direction.DESC, "sno"));
+		List<SeriesListDTO> result=srepo.findAll(pageable).stream()
 												.map(img->new SeriesListDTO(img)
 														.defImg(imgRepo.findBySeries(img)))
 												.collect(Collectors.toList());
 		
 		model.addObject("mv", result);
-		//model.addObject("pd",PageData.create(page, 4, (int)srepo.count()));
+		model.addObject("pd", PageData.create(page, limit, (int)srepo.count(), 10));
 		return model;
 	}
 

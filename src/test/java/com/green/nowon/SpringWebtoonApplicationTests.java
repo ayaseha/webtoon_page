@@ -2,9 +2,12 @@ package com.green.nowon;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.green.nowon.domain.entity.Category;
 import com.green.nowon.domain.entity.SeriesEntity;
 import com.green.nowon.domain.entity.SeriesImgEntity;
@@ -13,6 +16,7 @@ import com.green.nowon.domain.repository.SeriesEntityRepository;
 import com.green.nowon.domain.repository.SeriesImageEntityRepository;
 import com.green.nowon.domain.repository.UserEntityRepository;
 import com.green.nowon.security.MyRole;
+import com.green.nowon.utils.FileUploadUtil;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -31,6 +35,7 @@ class SpringWebtoonApplicationTests {
 	@Autowired
 	private SeriesImageEntityRepository imgRepo;
 	
+	
 	//@Test
 	void contextLoads() {
 		
@@ -43,15 +48,15 @@ class SpringWebtoonApplicationTests {
 	
 	//@Test
 	void jpatest() {
+		MultipartFile file;
 		
-		System.out.println(imgRepo.findBySeries(srepo.findById(3L).orElseThrow())); ;
-		
+//		System.out.println(imgRepo.findBySeries(srepo.findById(3L).orElseThrow())); ;
 	}
 	
-	//@Test
+	@Test
 	void seriesCreate() {
 		
-		for (int i=1; i<=100; i++) {
+		for (int i=101; i<=150; i++) {
 			SeriesEntity entity= SeriesEntity.builder()
 			.title("테스트작품 로맨스"+i)
 			.synopsis("이것은 로맨스 장르의 테스트 입력입니다. ")
@@ -61,9 +66,9 @@ class SpringWebtoonApplicationTests {
 			//
 			
 			imgRepo.save(SeriesImgEntity.builder()
-					.url("../images/Cat.jpg")
-					.orgName("Cat.jpg")
-					.newName("Cat-"+i+".jpg")
+					.url("../images/cat2.jpg")
+					.orgName("cat2.jpg")
+					.newName("cat-"+i+".jpg")
 					.bucketKey("")
 					.series(srepo.save(entity))
 					.build());

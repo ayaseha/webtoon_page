@@ -7,7 +7,6 @@
 	<body>
 	<!--카테고리>시리즈// 회차 리스트 -->
 		<main>
-		<hr>
 		<div class="series-detail flex">
 			<div class="thum">
 				<img alt="섬네일" th:src="${thum.url}">
@@ -36,15 +35,20 @@
 							</a>
 						</li>
 					</ul>
-				<div class="page-wrap flex center">
-					<th:block th:each="no : ${#numbers.sequence(1,tot)}">
-					<th:block th:each="dto:${board}">
-					<a th:href="@{|/web/${#strings.toLowerCase(dto.series.category)}/${dto.series.sno}/${dto.bno}?page=${no}|}" th:text="${no}">페이지번호</a>
-					</th:block>
-					</th:block>
+				<div class="page-wrap flex center" th:unless="${#lists.isEmpty(board)}">
+					<div th:if="${pd.from gt 1}">
+						<a  th:href="@{|/web/${#strings.toLowerCase(thum.series.category)}/${thum.series.sno}?page=${pd.from-1}|}" >&lt;</a>
+					</div>
+					<div>
+						<span th:each="page : ${#numbers.sequence(pd.getFrom,pd.tot)}">
+							<a  th:href="@{|/web/${#strings.toLowerCase(thum.series.category)}/${thum.series.sno}?page=${page}|}" th:text="${page}">페이지번호</a>
+						</span>
+					</div>
+					<div th:if="${pd.to lt pd.tot}">
+						<a  th:href="@{|/web/${#strings.toLowerCase(thum.series.category)}/${thum.series.sno}?page=${pd.to+1}|}" >&gt;</a>
+					</div>
 				</div>
 			</div>
-				
 		</main>
 	</body>
 </html>

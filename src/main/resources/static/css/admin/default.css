@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+
+main> p {
+	margin: 30px;
+}
+
+main>a {
+	float: right;
+	margin: 10px;
+	color: black;
+	padding: 2px;
+	width: 120px;
+	height: 20px;
+	border: 1px solid #a9a9a9;
+	border-radius: 3px;
+	font-size: 14px;
+	text-align: center;
+	line-height: 1.4;
+}
+main {
+	height: 500px;
+}

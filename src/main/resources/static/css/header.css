@@ -1,17 +1,28 @@
 @charset "UTF-8";
 
 a {text-decoration: none;}
+header {
+	background-color: #0080ff;
+}
 
 #logo {
 	margin: 0 20px;
 	font-size: 36px;
-	font-weight: 700;
-	
+}
+
+#logo>a{
+	font-weight: 900;
+	color: white;
 }
 #category>div:not(div:last-of-type) {
 	margin: 20px auto;
 	padding: 0 10px;
 	
+}
+
+#category a {
+	color : #ffeef6;
+	font-weight: 600
 }
 
 #category div:last-of-type{
@@ -32,18 +43,22 @@ a {text-decoration: none;}
 }
 
 #user a{
-	padding: 3px 5px;
-	border: 1px solid #a9a9a9;
-	border-radius: 3px;
-	background-color: #ffd9ec;
-	color: black;
+	color: #ffeef6;
+	font-weight: 600
 }
+#user a:first-of-type {
+	padding-right: 12px;
+	border-right: 1px solid #ffeef6;
+}
+#user a:last-of-type {
+	padding-left: 5px;
+} 
 
 #user form button{
-	padding: 3px 5px;
-	border: 1px solid #a9a9a9;
-	border-radius: 3px;
-	background-color: #ffd9ec;
-	color: black;
-	line-height: 1.4;
+	color: #ffeef6;
+	font-weight: 600 ;
+	border: none;
+	background-color: unset;
+	line-height: 1;
+	padding-left: 10px;
 }

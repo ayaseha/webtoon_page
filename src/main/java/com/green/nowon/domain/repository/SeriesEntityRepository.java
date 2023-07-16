@@ -19,7 +19,8 @@ public interface SeriesEntityRepository extends JpaRepository<SeriesEntity, Long
 
 	int countByCategory(Category valueOf);
 
-	Page<SeriesEntity> findAllByCategory(Pageable pageable, Category valueOf);
+	Page<SeriesEntity> findAllByCategory(Category valueOf, Pageable pageable);
+
 
 
 

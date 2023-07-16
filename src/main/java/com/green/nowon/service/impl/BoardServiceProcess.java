@@ -27,6 +27,7 @@ import com.green.nowon.domain.repository.BoardImageEntityRepository;
 import com.green.nowon.domain.repository.SeriesImageEntityRepository;
 import com.green.nowon.service.BoardService;
 import com.green.nowon.utils.FileUploadUtil;
+import com.green.nowon.utils.PageData;
 
 import lombok.RequiredArgsConstructor;
 
@@ -91,19 +92,24 @@ public class BoardServiceProcess implements BoardService {
 
 	@Override
 	public void ListProcess(long sno, Model model, int page) {
-		int size=12;
-		Pageable pageable =PageRequest.of(page-1, size, Sort.by(Direction.DESC, "bno"));
-		List<BoardListDTO> result=brepo.findBySeriesSno(sno).stream()
+		if(page<1)page=1;
+		int limit=10; //한 화면에 보이는 개수
+		Pageable pageable =PageRequest.of(page-1, limit, Sort.by(Direction.DESC, "bno"));
+		List<BoardListDTO> result=brepo.findBySeriesSno(sno,pageable).stream()
 				.map(img->new BoardListDTO(img).defImg(irepo.findByBoardBnoAndIsDef(img.getBno(),true)))
 				.collect(Collectors.toList());
-		SeriesImgEntity thum=siRepo.findBySeriesSno(sno);
 		
+		SeriesImgEntity thum=siRepo.findBySeriesSno(sno);
 		Page<BoardListDTO> pd=new PageImpl<>(result, pageable, result.size());
+		System.out.println(thum.getUrl());
+		if(thum.getUrl().equals("../images/Cat.jpg")) {
+			thum.setUrl("//s3.ap-northeast-2.amazonaws.com/web.fileupload.bucket/image/series/Cat.jpg");
+		}
 		
 		model.addAttribute("board", result);
-		model.addAttribute("tot",pd.getTotalPages());
+		model.addAttribute("pd", PageData.create(page, limit, brepo.countBySeriesSno(sno), 10));
 		model.addAttribute("thum",thum);
-		
+
 	}
 
 	@Override
