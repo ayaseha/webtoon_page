@@ -1,13 +1,10 @@
 package com.green.nowon;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amazonaws.services.s3.AmazonS3Client;
 import com.green.nowon.domain.entity.Category;
 import com.green.nowon.domain.entity.SeriesEntity;
 import com.green.nowon.domain.entity.SeriesImgEntity;
@@ -16,7 +13,6 @@ import com.green.nowon.domain.repository.SeriesEntityRepository;
 import com.green.nowon.domain.repository.SeriesImageEntityRepository;
 import com.green.nowon.domain.repository.UserEntityRepository;
 import com.green.nowon.security.MyRole;
-import com.green.nowon.utils.FileUploadUtil;
 
 import lombok.extern.log4j.Log4j2;
 

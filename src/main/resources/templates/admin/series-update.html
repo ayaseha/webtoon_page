@@ -12,42 +12,43 @@
 	<body>
 		<main>
 			<div class="wrap view-size">
-				<form action="/admin/series/new" method="post">
+				<form action="|/web/${#strings.toLowerCase(se.category)}/${se.sno}/update|" method="post">
 					<p>
 						<span>작품명</span>
-						<input type="text" name="title" placeholder="작품명을 입력해주세요.">
+						<input type="text" name="title" placeholder="작품명을 입력해주세요." th:value="${se.title}">
 					</p>
 					<p>
 						<span>작가</span>
-						<input type="text" name="writer" placeholder="작가명을 입력해주세요.">
+						<input type="text" name="writer" placeholder="작가명을 입력해주세요." th:value="${se.writer}">
 					</p>
 					<p>
 						<span>장르</span>
 						<select name="category">
 							<option th:each="cate : ${T(com.green.nowon.domain.entity.Category).values()}"
-									th:if="${cate.name() != 'NOTICE'}"
+									th:if="${cate.name() != 'NOTICE'}" th:selected="${cate.name()}==${se.category}"
 									th:value="${cate.name()}" th:text="${cate.koName()}"></option>
 						</select>
 					</p>
 					<p id="img-area">
 						<span>표지</span>
 						<i class="img-wrap">
-							<label >
+							<label th:style="|background-image: url('${img.url}');|">
 								<span>+</span>
 								<input type="file" onchange="tempUpload(this)">
 							</label>
-							<input type="hidden" class="bucket-key" name="bucketKey" >
-							<input type="hidden" class="org-name" name="orgName" >
-							<input type="hidden" class="new-name" name="newName" >
+							<input type="hidden" class="bucket-key" name="bucketKey" th:value="${img.bucketKey}" >
+							<input type="hidden" class="org-name" name="orgName" th:value="${img.orgName}">
+							<input type="hidden" class="new-name" name="newName" th:value="${img.newName}">
 						</i>
 					</p>
 					<p>
 						<span>줄거리</span>
-						<textarea name="synopsis" cols="97" rows="10" placeholder="줄거리를 입력해주세요."></textarea>
+						<textarea name="synopsis" cols="97" rows="10" placeholder="줄거리를 입력해주세요." th:value="${se.synopsis}"></textarea>
 					</p>
 					<p class="save">
 						<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-						<button>작품 등록</button>
+						<input type="hidden" name="_method" value="PUT">
+						<button>수정완료</button>
 					</p>
 				</form>
 			</div>

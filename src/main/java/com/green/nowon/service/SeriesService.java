@@ -21,5 +21,9 @@ public interface SeriesService {
 
 	ModelAndView selectListProcess();
 
+	void updateProcess(long sno, SeriesSaveDTO dto);
+
+	void seriesUpdate(long sno, Model model);
+
 
 }

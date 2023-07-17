@@ -3,6 +3,7 @@
  */
 var otherCheckbox;
 var isValid=false;
+var emailCheck=false;
 
 $(function(){
 	$("#check-all").click(checkAllClicked);//전체동의
@@ -11,6 +12,7 @@ $(function(){
 	$('.input-wrap input').blur(regExpCheck);
 	$(".input-wrap:eq(0)>input").keyup(emailKeyup)
 	$("form").on("change", vaildCheck) //폼태그 안의 내용이 바뀔때마다 회원가입버튼 활성화가능한지 체크
+	$("form").on("blur", vaildCheck)
 });
 
 
@@ -87,7 +89,7 @@ function vaildCheck() {
 	//$("#check-all")는 otherCheckboxClicked 펑션으로
 	// 모든 항목이 체크되어있으면 무조건 체크되기때문에 동의 체크되었는지 확인가능
 	
-	if($("#check-all").is(":checked") && check){
+	if($("#check-all").is(":checked") && check && emailCheck){
 		isValid = true; //모든 항목이 유효성검사 완료, 동의체크가 되어있어야 true
 	}else {
 		isValid = false; //아닐시 false
@@ -138,13 +140,28 @@ function emailKeyup(){
 		if (in_email.length<10)return;
 	//서버-DB로 접근
 	var target=$(this).parents(".input-wrap").find(".msg");
-	$.ajax({
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	
+	 $.ajax({
+		 beforeSend:function(xhr) {//csrf적용시 
+			xhr.setRequestHeader(header, token); 
+		 },	
 		url:"/user/email-check",
 		type:"post",
 		data:{email:in_email},
 		//비동기요청이 정상적으로 처리되면 success 함수가 실행함
 		success: function(result){
-			target.text(result).show();
+			if(result==true){
+				target.text("사용 가능한 이메일입니다.").show();
+				target.css("color","green");
+				emailCheck=result;
+			}else {
+				emailCheck=result;
+				target.text("사용할 수 없는 이메일입니다.").show();
+				target.css("color","red");
+			}
+			
 		}
 	});
 }

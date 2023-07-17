@@ -5,11 +5,14 @@ import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.green.nowon.domain.dto.BoardImgSaveDTO;
 import com.green.nowon.domain.dto.SeriesSaveDTO;
 import com.green.nowon.domain.entity.Category;
 import com.green.nowon.service.SeriesService;
@@ -58,5 +61,10 @@ public class AdminController {
 		return seDao.selectListProcess();
 	}
 	
+	@PutMapping("/web/{name}/{sno}/update")
+	public String seriesUpdate(@PathVariable String name, @PathVariable long sno, SeriesSaveDTO dto) {
+		seDao.updateProcess(sno,dto);
+		return "redirect:/web/{name}/{sno}";
+	}
 
 }

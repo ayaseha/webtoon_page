@@ -105,6 +105,9 @@ public class BoardServiceProcess implements BoardService {
 		if(thum.getUrl().equals("../images/Cat.jpg")) {
 			thum.setUrl("//s3.ap-northeast-2.amazonaws.com/web.fileupload.bucket/image/series/Cat.jpg");
 		}
+		if(thum.getUrl().equals("../images/cat2.jpg")) {
+			thum.setUrl("//s3.ap-northeast-2.amazonaws.com/web.fileupload.bucket/image/series/cat2.jpg");
+		}
 		
 		model.addAttribute("board", result);
 		model.addAttribute("pd", PageData.create(page, limit, brepo.countBySeriesSno(sno), 10));

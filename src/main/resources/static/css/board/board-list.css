@@ -43,6 +43,7 @@ div ul:first-child li{
 }
 
 .series-detail> .thum {
+	margin-top: 1%;
 	margin-left: 15%;
 }
 
@@ -64,4 +65,14 @@ div ul:first-child li{
 .series-detail> .detail span:nth-of-type(2) {
 	font-size: 14px;
 	display: block;
+}
+
+.series-detail> .update {
+	align-self: flex-end;
+    border: 1px solid;
+    border-radius: 50px;
+    width: 88px;
+    height: 25px;
+    text-align: center;
+    line-height: 1.5;
 }

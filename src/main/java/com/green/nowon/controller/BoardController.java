@@ -46,6 +46,12 @@ public class BoardController {
 		return "board/list";
 	}
 	
+	@GetMapping("/web/{name}/{sno}/update")
+	public String seriesUpdatePage(@PathVariable String name, @PathVariable long sno, Model model) {
+		service.seriesUpdate(sno,model);
+		return "admin/series-update";
+	}
+	
 	//회차 세부페이지 이동
 	@GetMapping("/web/{name}/{sno}/{bno}")
 	public String details(@PathVariable String name, @PathVariable long sno, @PathVariable long bno, Model model) {

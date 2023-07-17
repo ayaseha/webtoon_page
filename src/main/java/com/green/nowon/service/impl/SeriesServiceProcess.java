@@ -115,6 +115,39 @@ public class SeriesServiceProcess implements SeriesService {
 		return mv;
 	}
 
+	@Override
+	public void updateProcess(long sno, SeriesSaveDTO dto) {
+		SeriesImgEntity oldImg= imgRepo.findBySeriesSno(sno);
+		
+		srepo.save(SeriesEntity.builder()
+				.sno(sno)
+				.title(dto.getTitle())
+				.synopsis(dto.getSynopsis())
+				.writer(dto.getWriter())
+				.build());
+		
+		
+		String uploadKey=SERIES_PATH+dto.getNewName();
+		if(!oldImg.getBucketKey().equals(dto.getBucketKey())) {
+			String url=FileUploadUtil.s3TempToSrc(s3Client, BUCKET, dto.getBucketKey(), uploadKey);
+			imgRepo.save(SeriesImgEntity.builder()
+					.url(url)
+					.orgName(dto.getOrgName())
+					.newName(dto.getNewName())
+					.bucketKey(uploadKey)
+					.build());
+		}
+		
+	}
+
+	@Override
+	public void seriesUpdate(long sno, Model model) {
+		
+		model.addAttribute("se", srepo.findById(sno).orElseThrow());
+		model.addAttribute("img",imgRepo.findBySeriesSno(sno));
+		
+	}
+
 	
 	
 }

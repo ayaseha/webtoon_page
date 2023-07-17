@@ -5,6 +5,9 @@
 	<link rel="stylesheet" href="/css/user/signup.css">
 	<script src="/js/sign/signup.js"></script>
 	<meta charset="UTF-8">
+	<meta name="_csrf" th:content="${_csrf.token}"/>
+		<!-- default header name is X-CSRF-TOKEN -->
+		<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 	<title>회원가입</title>
 </head>
 <body>

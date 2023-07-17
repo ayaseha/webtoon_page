@@ -27,11 +27,11 @@ public class SignController {
 	
 	@ResponseBody
 	@PostMapping("/user/email-check")
-	public String emailCheck(String email) {
+	public boolean emailCheck(String email) {
 		if(repo.findByEmail(email).isEmpty()) {
-			return "사용 가능한 이메일입니다.";
+			return true;
 		}
-		return "사용 불가능한 이메일입니다.";
+		return false;
 	}
 
 }

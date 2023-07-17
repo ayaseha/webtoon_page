@@ -7,8 +7,9 @@ logging:
 spring:
   profiles:
     active: common
+    default: common
   config:
-    import: optional:configserver:http://3.39.122.35:8888
+    import: configserver:http://3.39.122.35:8888
     
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver    
@@ -22,5 +23,11 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+
+  cloud:
+    config:
+      name: wt
+      request-connect-timeout: 33000
+      
   application:
-    name: wt
+    name: wt-common
