@@ -9,7 +9,7 @@ spring:
     active: common
     default: common
   config:
-    import: configserver:http://3.39.122.35:8888
+    import: configserver:
     
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver    
