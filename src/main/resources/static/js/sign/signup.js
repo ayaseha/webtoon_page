@@ -13,7 +13,15 @@ $(function(){
 	$(".input-wrap:eq(0)>input").keyup(emailKeyup)
 	$("form").on("change", vaildCheck) //폼태그 안의 내용이 바뀔때마다 회원가입버튼 활성화가능한지 체크
 	$("form").on("blur", vaildCheck)
+	$(".sub-btn>button").submit(successAlert)
+	
+	
 });
+
+function successAlert() {
+	alert("회원가입이 완료되었습니다.")
+	
+}
 
 
 //이메일,패스워드,닉네임 체크

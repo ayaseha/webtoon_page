@@ -46,6 +46,7 @@ public class BoardController {
 		return "board/list";
 	}
 	
+	//회차 수정페이지 이동
 	@GetMapping("/web/{name}/{sno}/update")
 	public String seriesUpdatePage(@PathVariable String name, @PathVariable long sno, Model model) {
 		service.seriesUpdate(sno,model);
